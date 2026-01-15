@@ -1,0 +1,6 @@
+name: AezaCore
+version: '1.0-SNAPSHOT'
+main: dev.ch0.aezacore.AezaCore
+api-version: '1.21'
+authors: [ CheetahDoesStuff ]
+description: The core Aeza module.
