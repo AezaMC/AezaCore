@@ -28,6 +28,6 @@ public class CoreLogger {
     }
 
     public static void LogAddonReg(String name) {
-        send("    Registered addon " + name);
+        send("    Starting registry process for " + name);
     }
 }

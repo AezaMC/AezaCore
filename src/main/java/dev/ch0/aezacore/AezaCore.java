@@ -4,6 +4,7 @@ import dev.ch0.aezacore.dbManager.DatabaseManager;
 import dev.ch0.aezacore.dbManager.SQLiteDatabase;
 import dev.ch0.aezacore.initApi.AezaAddon;
 import dev.ch0.aezacore.initApi.CoreReadyEvent;
+import dev.ch0.aezacore.initApi.VersionChecker;
 import dev.ch0.aezacore.logger.CoreLogger;
 import dev.ch0.aezacore.logger.CounterLogger;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -50,6 +51,15 @@ public final class AezaCore extends JavaPlugin {
 
     public void registerAddon(AezaAddon addon) {
         CoreLogger.LogAddonReg(addon.name());
+        CounterLogger regCounter = new CounterLogger(2, 2);
+
+        regCounter.Step("Verifying required core version");
+        String reqVer = addon.GetCoreVer();
+        if (!VersionChecker.Satisfies(this.getDescription().getVersion(), reqVer)) {
+            getLogger().severe("[ Aeza ] plugin " + addon.name() + " requires AezaCore version " + reqVer + " but only " + this.getDescription().getVersion() + " is present! Plugin will not load");
+            return;
+        }
+        regCounter.Step("Adding addon to registry");
         addons.add(addon);
     }
 
