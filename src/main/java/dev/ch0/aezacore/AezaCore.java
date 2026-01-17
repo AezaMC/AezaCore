@@ -14,6 +14,7 @@ import java.util.List;
 
 public final class AezaCore extends JavaPlugin {
     private final List<AezaAddon> addons = new ArrayList<>();
+    private final List<AezaAddon> failedAddons = new ArrayList<>();
     private DatabaseManager databaseManager;
 
     public DatabaseManager getDatabaseManager() {
@@ -57,6 +58,7 @@ public final class AezaCore extends JavaPlugin {
         String reqVer = addon.GetCoreVer();
         if (!VersionChecker.Satisfies(this.getDescription().getVersion(), reqVer)) {
             getLogger().severe("[ Aeza ] plugin " + addon.name() + " requires AezaCore version " + reqVer + " but only " + this.getDescription().getVersion() + " is present! Plugin will not load");
+            failedAddons.add(addon);
             return;
         }
         regCounter.Step("Adding addon to registry");
