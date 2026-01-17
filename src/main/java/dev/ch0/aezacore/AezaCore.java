@@ -1,5 +1,6 @@
 package dev.ch0.aezacore;
 
+import dev.ch0.aezacore.commands.aezaStatus;
 import dev.ch0.aezacore.dbManager.DatabaseManager;
 import dev.ch0.aezacore.dbManager.SQLiteDatabase;
 import dev.ch0.aezacore.initApi.AezaAddon;
@@ -17,6 +18,14 @@ public final class AezaCore extends JavaPlugin {
     private final List<AezaAddon> failedAddons = new ArrayList<>();
     private DatabaseManager databaseManager;
 
+    public List<AezaAddon> getAddons() {
+        return addons;
+    }
+
+    public List<AezaAddon> getFailedAddons() {
+        return failedAddons;
+    }
+
     public DatabaseManager getDatabaseManager() {
         return databaseManager;
     }
@@ -26,17 +35,20 @@ public final class AezaCore extends JavaPlugin {
         getServer().getScheduler().runTask(this, () -> {
             CoreLogger.LogInit();
 
-            CounterLogger initCounter = new CounterLogger(1, 1);
+            CounterLogger initCounter = new CounterLogger(1, 2);
             initCounter.Step("Initializing database");
             try {
                 SQLiteDatabase db = new SQLiteDatabase(this, "aeza");
                 databaseManager = new DatabaseManager(this, db);
-                initCounter.Step("Initializing database");
             } catch (Exception e) {
                 e.printStackTrace();
                 getServer().getPluginManager().disablePlugin(this);
                 return;
             }
+            initCounter.Step("Initializing commands");
+            CounterLogger commandsCounter = new CounterLogger(2, 1);
+            commandsCounter.Step("Initializing plugin status command");
+            getCommand("aezastatus").setExecutor(new aezaStatus());
 
             CoreLogger.LogAddonRegStart();
             getServer().getPluginManager().callEvent(new CoreReadyEvent());
