@@ -1,5 +1,6 @@
 package dev.ch0.aezacore;
 
+import dev.ch0.aezacore.commands.aezaHelp;
 import dev.ch0.aezacore.commands.aezaStatus;
 import dev.ch0.aezacore.dbManager.DatabaseManager;
 import dev.ch0.aezacore.dbManager.SQLiteDatabase;
@@ -46,9 +47,13 @@ public final class AezaCore extends JavaPlugin {
                 return;
             }
             initCounter.Step("Initializing commands");
-            CounterLogger commandsCounter = new CounterLogger(2, 1);
+            CounterLogger commandsCounter = new CounterLogger(2, 2);
+
             commandsCounter.Step("Initializing plugin status command");
             getCommand("aezastatus").setExecutor(new aezaStatus());
+
+            commandsCounter.Step("Initializing help command");
+            getCommand("aezahelp").setExecutor(new aezaHelp());
 
             CoreLogger.LogAddonRegStart();
             getServer().getPluginManager().callEvent(new CoreReadyEvent());
