@@ -1,6 +1,14 @@
 name: AezaCore
-version: '1.0-SNAPSHOT'
+version: '1.0.1'
 main: dev.ch0.aezacore.AezaCore
 api-version: '1.21'
 authors: [ CheetahDoesStuff ]
 description: The core Aeza module.
+
+commands:
+  aezastatus:
+    description: "An AezaCore admin command. Shows the status of present Aeza plugins."
+    usage: "/aezastatus"
+    aliases: [ aezapluginstatus, aezaplugins ]
+    permission: aeza.admin.core.command.status
+    permission-message: "You do not have permission to use the Aeza status admin command!"
