@@ -12,3 +12,10 @@ commands:
     aliases: [ aezapluginstatus, aezaplugins ]
     permission: aeza.admin.core.command.status
     permission-message: "You do not have permission to use the Aeza status admin command!"
+
+  aezahelp:
+    description: "An AezaCore admin command. Shows what channels you can use to get information about the Aeza ecosystem."
+    usage: "/aezahelp"
+    aliases: [ aezasupport, helpaeza, supportaeza ]
+    permission: aeza.admin.core.command.help
+    permission-message: "You do not have permission to use the Aeza help admin command!"
