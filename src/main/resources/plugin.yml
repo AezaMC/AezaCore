@@ -10,5 +10,5 @@ commands:
     description: "An AezaCore admin command. Shows the status of present Aeza plugins."
     usage: "/aezastatus"
     aliases: [ aezapluginstatus, aezaplugins ]
-    permission: aeza.admin.command.status
+    permission: aeza.admin.core.command.status
     permission-message: "You do not have permission to use the Aeza status admin command!"
